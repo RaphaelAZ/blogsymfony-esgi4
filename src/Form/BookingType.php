@@ -4,11 +4,10 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use App\Entity\Service;
-use App\Entity\User;
-use Doctrine\DBAL\Types\DateType;
-use Doctrine\DBAL\Types\TimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,13 +18,12 @@ class BookingType extends AbstractType
         $builder
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date de réservation',
-                'attr' => ['class' => 'form-control']
+                'label' => 'Date de réservation'
             ])
             ->add('heure', TimeType::class, [
                 'widget' => 'single_text',
                 'label' => 'Heure de réservation',
-                'attr' => ['class' => 'form-control']
+                'mapped' => false
             ])
             ->add('service', EntityType::class, [
                 'class' => Service::class,

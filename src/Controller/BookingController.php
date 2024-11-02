@@ -21,11 +21,23 @@ class BookingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Enregistre la réservation en base de données
+            $user = $this->getUser();
+            if ($user) {
+                $booking->setUser($user);
+            }
+
+            $date = $form->get('date')->getData();
+            $heure = $form->get('heure')->getData();
+
+            // Creation datetime
+            $dateTime = new \DateTime();
+            $dateTime->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
+            $dateTime->setTime($heure->format('H'), $heure->format('i'));
+
+            $booking->setDate($dateTime);
+
             $entityManager->persist($booking);
             $entityManager->flush();
-
-            $this->addFlash('success', 'Votre réservation a été enregistrée avec succès.');
 
             return $this->redirectToRoute('booking_success');
         }

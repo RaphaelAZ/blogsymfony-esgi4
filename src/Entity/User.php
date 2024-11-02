@@ -5,10 +5,12 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
-{
+implements PasswordAuthenticatedUserInterface{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
