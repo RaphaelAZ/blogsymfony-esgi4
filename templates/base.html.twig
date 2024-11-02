@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Booking{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+</head>
+<body>
+    {# Header ou Navigation #}
+    {% include 'partials/header.html.twig' %}
+
+    {# Contenu principal de la page #}
+    <main class="container mt-5">
+        {% block body %}
+        {# Contenu de chaque page spécifique ici #}
+        {% endblock %}
+    </main>
+
+    {# Footer #}
+    {% include 'partials/footer.html.twig' %}
+
+    <script src="{{ asset('build/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>
