@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use App\Entity\Service;
+use App\Validator\AvailableTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,9 +22,16 @@ class BookingType extends AbstractType
                 'label' => 'Date de réservation'
             ])
             ->add('time', TimeType::class, [
+                'constraints' => [
+                    new AvailableTime(),
+                ],
                 'widget' => 'single_text',
                 'label' => 'Heure de réservation',
-                'mapped' => false
+                'input' => 'datetime',
+                'mapped' => false,
+                'attr' => [
+                'class' => 'timepicker',
+        ],
             ])
             ->add('service', EntityType::class, [
                 'class' => Service::class,

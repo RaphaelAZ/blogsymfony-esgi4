@@ -1,12 +1,38 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/booking/booking.css') }}">
+{% endblock %}
+
 {% block title %}Réserver{% endblock %}
 
 {% block body %}
     <h1>Renseigner vos Informations</h1>
 
     {{ form_start(formUser, {'action': path('booking_user'), 'method': 'POST'}) }}
-    {{ form_widget(formUser) }}
-    <button type="submit">Envoyer</button>
+        <div>
+            {{ form_label(formUser.name, 'Nom') }}
+            {{ form_widget(formUser.name) }}
+            {{ form_errors(formUser.name) }}
+        </div>
+
+        <div>
+            {{ form_label(formUser.email, 'Email') }}
+            {{ form_widget(formUser.email) }}
+            {% if formUser.email.vars.errors|length > 0 %}
+                <div class="form-error">{{ formUser.email.vars.errors[0].message }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form_label(formUser.phone, 'Téléphone') }}
+            {{ form_widget(formUser.phone) }}
+            {% if formUser.phone.vars.errors|length > 0 %}
+                <div class="form-error">{{ formUser.phone.vars.errors[0].message }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Envoyer</button>
     {{ form_end(formUser) }}
 {% endblock %}

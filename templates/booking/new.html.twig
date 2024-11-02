@@ -5,31 +5,37 @@
     <link rel="stylesheet" href="{{ asset('build/booking/booking.css') }}">
 {% endblock %}
 
+{% block javascript %}
+    <script src="{{ asset('build/js/booking.js') }}"></script>
+{% endblock %}
+
 {% block title %}Réserver{% endblock %}
 
 {% block body %}
 <h1>Réserver un service</h1>
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(form)}}
 
-        <div class="form-group mb-3">
-            {{ form_label(form.date, 'Date de réservation', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+        <div>
+            {{ form_label(form.date, 'Date de réservation') }}
+            {{ form_widget(form.date) }}
             {{ form_errors(form.date) }}
         </div>
 
-        <div class="form-group mb-3">
-            {{ form_label(form.time, 'Heure de réservation', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(form.time, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.time) }}
+        <div>
+            {{ form_label(form.time, 'Heure de réservation') }}
+            {{ form_widget(form.time) }}
+            {% if form.time.vars.errors|length > 0 %}
+                <div class="form-error">{{ form.time.vars.errors[0].message }}</div>
+            {% endif %}
         </div>
 
-        <div class="form-group mb-3">
-            {{ form_label(form.service, 'Type de service', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(form.service, {'attr': {'class': 'form-control'}}) }}
+        <div>
+            {{ form_label(form.service, 'Type de service') }}
+            {{ form_widget(form.service) }}
             {{ form_errors(form.service) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Réserver</button>
+        <button type="submit">Réserver</button>
 
     {{ form_end(form) }}
 {% endblock %}

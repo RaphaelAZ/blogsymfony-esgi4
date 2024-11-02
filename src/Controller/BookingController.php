@@ -77,10 +77,8 @@ class BookingController extends AbstractController
                 $serv = $entityManager->getRepository(Service::class)->findByID($booking->getService()->getId()); // Réinsertion du service (Bugfix)
                 $booking->setService($serv);
 
-                dd($session->get('booking'));
-
-                // $entityManager->persist($booking);
-                // $entityManager->flush();
+                $entityManager->persist($booking);
+                $entityManager->flush();
     
                 return $this->redirectToRoute('booking_success');
             }
