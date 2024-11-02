@@ -16,11 +16,11 @@ class Booking
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user;
+    private User $user;
 
     #[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Service $service;
+    private ?Service $service = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -47,10 +47,9 @@ class Booking
         return $this->service;
     }
 
-    public function setService(?Service $service): self
+    public function setService(Service $service): self 
     {
         $this->service = $service;
-
         return $this;
     }
 

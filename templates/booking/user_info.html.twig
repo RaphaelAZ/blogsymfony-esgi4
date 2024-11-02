@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations Utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Renseigner vos Informations</h1>
+
+    {{ form_start(formUser, {'action': path('booking_user'), 'method': 'POST'}) }}
+    {{ form_widget(formUser) }}
+    <button type="submit">Envoyer</button>
+    {{ form_end(formUser) }}
+{% endblock %}

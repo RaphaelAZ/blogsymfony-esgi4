@@ -5,12 +5,10 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
-implements PasswordAuthenticatedUserInterface{
+{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,7 +21,7 @@ implements PasswordAuthenticatedUserInterface{
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private Collection $bookings;
@@ -57,14 +55,14 @@ implements PasswordAuthenticatedUserInterface{
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPhone(): ?string
     {
-        return $this->password;
+        return $this->phone;
     }
 
-    public function setPassword(string $password): static
+    public function setPhone(string $phone): static
     {
-        $this->password = $password;
+        $this->phone = $phone;
 
         return $this;
     }
