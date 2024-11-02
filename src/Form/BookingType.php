@@ -20,7 +20,7 @@ class BookingType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'Date de réservation'
             ])
-            ->add('heure', TimeType::class, [
+            ->add('time', TimeType::class, [
                 'widget' => 'single_text',
                 'label' => 'Heure de réservation',
                 'mapped' => false

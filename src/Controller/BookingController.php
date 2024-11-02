@@ -7,7 +7,6 @@ use App\Entity\Service;
 use App\Entity\User;
 use App\Form\BookingType;
 use App\Form\UserType;
-use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +29,17 @@ class BookingController extends AbstractController
 
             if (!$service) {
                 throw new \Exception("Service {$serviceId} introuvable.");
+            }
+
+            $date = $formBooking->get('date')->getData();
+            $time = $formBooking->get('time')->getData();
+
+            if($date && $time) {
+                $combinedDateTime = new \DateTime();
+                $combinedDateTime->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
+                $combinedDateTime->setTime($time->format('H'), $time->format('i'), $time->format('s'));
+    
+                $booking->setDate($combinedDateTime);
             }
 
             $booking->setService($service);
@@ -67,8 +77,10 @@ class BookingController extends AbstractController
                 $serv = $entityManager->getRepository(Service::class)->findByID($booking->getService()->getId()); // Réinsertion du service (Bugfix)
                 $booking->setService($serv);
 
-                $entityManager->persist($booking);
-                $entityManager->flush();
+                dd($session->get('booking'));
+
+                // $entityManager->persist($booking);
+                // $entityManager->flush();
     
                 return $this->redirectToRoute('booking_success');
             }
@@ -80,8 +92,14 @@ class BookingController extends AbstractController
     }
 
     #[Route('/booking/success', name: 'booking_success')]
-    public function success(): Response
+    public function success(SessionInterface $session): Response
     {
-        return $this->render('booking/success.html.twig');
+        $booking = $session->get('booking');
+        if ($booking) {
+            return $this->render('booking/success.html.twig', [
+                'booking' => $booking
+            ]);
+        }
+        return $this->redirectToRoute(route: 'booking_new');
     }
 }

@@ -22,7 +22,7 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
@@ -47,7 +47,7 @@ class Booking
         return $this->service;
     }
 
-    public function setService(Service $service): self 
+    public function setService(?Service $service): self 
     {
         $this->service = $service;
         return $this;

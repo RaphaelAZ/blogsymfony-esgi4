@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Booking{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link href="{{ asset('build/partials/header.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('build/partials/footer.css') }}" type="text/css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+
+    {% block stylesheets %}
+    {% endblock %}
 </head>
 <body>
     {# Header ou Navigation #}
     {% include 'partials/header.html.twig' %}
 
     {# Contenu principal de la page #}
-    <main class="container mt-5">
+    <main>
         {% block body %}
-        {# Contenu de chaque page spécifique ici #}
         {% endblock %}
     </main>
 

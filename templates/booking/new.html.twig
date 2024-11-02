@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Réservation{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/booking/booking.css') }}">
+{% endblock %}
+
+{% block title %}Réserver{% endblock %}
 
 {% block body %}
 <h1>Réserver un service</h1>
@@ -13,9 +18,9 @@
         </div>
 
         <div class="form-group mb-3">
-            {{ form_label(form.heure, 'Heure de réservation', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(form.heure, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.heure) }}
+            {{ form_label(form.time, 'Heure de réservation', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.time, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.time) }}
         </div>
 
         <div class="form-group mb-3">

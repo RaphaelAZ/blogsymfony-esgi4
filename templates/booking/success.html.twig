@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservation réussie{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/booking/booking.css') }}">
+{% endblock %}
+
+{% block title %}Réserver{% endblock %}
 
 {% block body %}
-<h1>Merci pour votre réservation !</h1>
-<p>Votre réservation a été enregistrée avec succès.</p>
-<a href="" class="btn btn-primary">Retour à l'accueil</a>
+    <h1>Merci pour votre réservation !</h1>
+    <p>Votre réservation a été enregistrée avec succès.</p>
+    <hr>
+    <h3>Récapitulatif:</h3>
+    <p>Vous avez rendez-vous le <span class="bold-info">{{ booking.date|date('d/m/Y') }}</span> à <span class="bold-info">{{ booking.date|date('H:i') }}</span></p>
+    <p>Le service choisi est <span class="bold-info">{{ booking.service.name }}</span></p>
+
+    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
 {% endblock %}
